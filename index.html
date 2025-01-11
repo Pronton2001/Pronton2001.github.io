@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+
+<style type="text/css">
+
+
+    .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.35), /* The top layer shadow */ 5px 5px 0 0px #fff, /* The second layer */ 5px 5px 1px 1px rgba(0, 0, 0, 0.35), /* The second layer shadow */ 10px 10px 0 0px #fff, /* The third layer */ 10px 10px 1px 1px rgba(0, 0, 0, 0.35), /* The third layer shadow */ 15px 15px 0 0px #fff, /* The fourth layer */ 15px 15px 1px 1px rgba(0, 0, 0, 0.35), /* The fourth layer shadow */ 20px 20px 0 0px #fff, /* The fifth layer */ 20px 20px 1px 1px rgba(0, 0, 0, 0.35), /* The fifth layer shadow */ 25px 25px 0 0px #fff, /* The fifth layer */ 25px 25px 1px 1px rgba(0, 0, 0, 0.35); /* The fifth layer shadow */
+        margin-left: 10px;
+        margin-right: 45px;
+    }
+	
+    vl {
+        border-left: 2px solid black;
+        height: 300px;
+        position: absolute;
+        left: 50%;
+        margin-left: -3px;
+        top: 50;
+      }
+
+    .centerTable { margin: 0px auto; }
+    hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    }
+
+
+</style> 
+
+<style>
+	.videoWrapper {
+	    position: relative;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	}
+	
+	.videoWrapper iframe {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	}
+</style>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta property="og:title"
+          content="SoftCTRL: Soft conservative KL-control of Transformer Reinforcement Learning for Autonomous Driving"/>
+    <meta property="og:description" content="Drive&Segment is a novel method for cross-modal unsupervised learning of semantic image segmentation
+    by leveraging synchronized LiDAR and image data"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SoftCtrl page</title>
+
+    <script>
+        function CopyToClipboard(id) {
+            var r = document.createRange();
+            r.selectNode(document.getElementById(id));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(r);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1P8DXFXFKM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-1P8DXFXFKM');
+    </script>
+<!--     <link rel="stylesheet" href="https://gradio.s3-us-west-2.amazonaws.com/2.6.2/static/bundle.css"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/favicon.svg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C2VYDTHPJZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C2VYDTHPJZ');
+</script>
+
+<body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    </div>
+</nav>
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">SoftCTRL: Soft conservative KL-control of Transformer Reinforcement Learning
+                        <br> for Autonomous Driving</h1>
+                    <div class="is-size-5 publication-authors">
+                <div class="column has-text-centered">
+                    <!-- <h1 class="title is-3 publication-title">ECCV 2022, oral presentation</h1> -->
+                    <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://github.com/Pronton2001/softCTRL" target="_blank"
+                   rel="noopener noreferrer">Tri Minh Huynh</a>,</span>
+                        <span class="author-block">
+                <a href="https://github.com/Pronton2001/softCTRL" target="_blank"
+                   rel="noopener noreferrer">Duc Dung Nguyen</a></span>
+                        <span class="author-block">
+              </span>
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">VNU HCMUT</span>
+                    </div>
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+
+
+                            <!-- arXiv Link. -->
+                            <span class="link-block">
+                  <a href="https://arxiv.org/abs/2410.22752" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                            <!-- Code Link. -->
+                            <span class="link-block">
+                  <a href="https://github.com/Pronton2001/softCTRL" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                            <!-- Code Link. -->
+<!--                             <span class="link-block">
+                  <a href="https://huggingface.co/spaces/vobecant/DaS" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fa fa-gamepad"></i>
+                    </span>
+                    <span>Gradio</span>
+                  </a>
+                </span> -->
+
+                            <!-- Code Link. -->
+                            <!-- <span class="link-block">
+                  <a href="https://colab.research.google.com/drive/126tBVYbt1s0STyv8DKhmLoHKpvWcv33H?usp=sharing"
+                     target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-google"></i>
+                    </span>
+                    <span>Colab</span>
+                  </a>
+                </span> -->
+
+                            <!-- Video Link. -->
+	    	<!-- <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=B9LK-Fxu7ao" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        In recent years, motion planning for urban self-driving cars (SDV) has 
+                        become a popular problem due to its complex interaction of road components. 
+                        To tackle this, many methods have relied on large-scale, human-sampled data 
+                        processed through Imitation learning (IL). Although effective, IL alone 
+                        cannot adequately handle safety and reliability concerns. Combining IL with 
+                        Reinforcement learning (RL) by adding KL divergence between RL and IL policy 
+                        to the RL loss can alleviate IL's weakness but suffer from over-conservation 
+                        caused by covariate shift of IL. To address this limitation, we introduce 
+                        a method that combines IL with RL using an implicit entropy-KL control that 
+                        offers a simple way to reduce the over-conservation characteristic. In 
+                        particular, we validate different challenging simulated urban scenarios 
+                        from the unseen dataset, indicating that although IL can perform well in 
+                        imitation tasks, our proposed method significantly improves robustness 
+                        (over 17% reduction in failures) and generates human-like driving behavior. 
+                    </p>
+                    <img class="round" style="width:1000px"  src="./sources/teaser/transformerRL-pipeline.svg"/>
+                </div>
+            </div>
+        </div>
+                <!-- <div>
+                    <img class="round" style="width:400px"  src="./sources/teaser/transformerRL-pipeline.svg"/>
+                    <vl>
+                    <img class="round" style="width:800px"  src="./sources/teaser/rl_finetuning.svg"/>
+                </div> -->
+    </div>
+</section>
+
+<hr>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Sample Outputs</h2>
+            </div>
+        </div>
+        <div class="columns is-centered">
+            <img class="round" style="width:400px" src="./sources/videos/KLSAC/7.gif"/>
+            <img class="round" style="width:400px" src="./sources/videos/KLSAC/8.gif"/>
+            <img class="round" style="width:400px" src="./sources/videos/KLSAC/10.gif"/>
+        </div>
+        <br>
+        <div class="columns is-centered">
+            <img class="round" style="width:400px" src="./sources/videos/KLSAC/43.gif"/>
+            <img class="round" style="width:400px" src="./sources/videos/KLSAC/57.gif"/>
+            <img class="round" style="width:400px" src="./sources/videos/KLSAC/78.gif"/>
+        </div>
+
+        <div class="content has-text-justified">
+            <p>
+                <b>Qualitative results.</b>
+                Demostrations of SoftCTRL in the unseen test set. Each video is a 25-second scenario, 
+                SDV in red, other agents in blue, crosswalks in yellow, SDV trajectory 
+                in the green line, SDV ground-truth trajectory in yellow line. 
+            </p>
+        </div>
+    </div>
+</section>
+<hr>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <!-- <div class="column is-four-fifths"> -->
+                <h2 class="title is-3">Overview</h2>
+            <!-- </div> -->
+        </div>
+                <div class="content has-text-justified">
+                    <p>
+                        Combining IL and RL is crucial to enhance realism with large-scale human 
+                        driving datasets and safety with causal relationship modeling.
+                        Traditional KL-loss methods use IL (teacher) policy to constrain RL 
+                        (student) policy. However, these approach may lead to the over-conservation 
+                        problem caused by covariate shift of IL.  This issue happens when IL 
+                        trained with logged datasets guide RL students in online training process, 
+                        where exploration is possible. Accumulated single-step errors can cause 
+                        planned states to diverge from the dataset distribution, resulting in 
+                        a compounding error issue. Therefore, this constraint force causes the 
+                        RL student to be too conservative with the estimated expert policies to 
+                        prevent the model from searching for a global solution.
+                    </p>
+                    <p>
+                        To address these problems, we propose a Soft conservative KL-ConTrol 
+                        of RL model (SoftCTRL) for autonomous driving, a novel approach for 
+                        off-policy RL. First, we use a pretrained Transformer IL model to 
+                        constrain RL updates with simple rewards. During the training step, 
+                        the RL policy is implicitly regularized by the KL divergence from this
+                        prior model and the entropy of its actions. The entropy term
+                        encourages the model to generate more diverse trajectories.
+                        This combats the over-conservation issues when retaining the
+                        proximity to the distribution of the realistic IL model by KL
+                        control. Our experiments show that a simple reward combining
+                        imitation with collision is sufficient for our proposed method.
+                        Also, our new approach beat the pretrained IL model by a
+                        large margin in overall tasks, demonstrating that our approach
+                        is not affected by the covariate shift of IL.
+                    </p>
+                </div>
+                <!-- <div>
+                    <img class="round" style="width:400px"  src="./sources/teaser/transformerRL-pipeline.svg"/>
+                    <vl>
+                    <img class="round" style="width:800px"  src="./sources/teaser/rl_finetuning.svg"/>
+                </div> -->
+    </div>
+</section>
+
+
+<hr>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-2">Method</h2>
+            </div>
+        </div>
+        <div class="content has-text-justified">
+            <p>
+                We propose SoftCTRL - a novel implicit entropy-KL control approach 
+                for RL fine-tuning. By leverage IL and RL advantages while mitigating 
+                the over-conservation issue inherent in traditional KL-regularized methods, 
+                SoftCTRL surpasses the performance of its IL baseline.
+            </p>
+        </div>
+        <div class="columns is-centered">
+            <img class="round" style="width:850px" src="./sources/method/klsac.svg"/>
+        </div>
+        <div class="content has-text-justified">
+            <p>
+                SoftCTRL is built on SAC, we simply modify the regression 
+                target of the policy evaluation step in SAC by adding the scaled log policy 
+                of reference behavioral method to the reward in any TD scheme. 
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<hr>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-2">Quantitative Result</h2>
+            </div>
+        </div>
+        <!-- <div class="content has-text-justified">
+            <p>
+
+            </p>
+        </div> -->
+        <div class="columns is-centered">
+            <img class="round" style="width:850px" src="./sources/method/quantitative.png"/>
+        </div>
+        <div class="content has-text-justified">
+            <p>
+                <b>Quantitative results.</b>
+                Evaluation of different methods using closed-loop evaluation in DriverGym 
+                on 100 sampled scenarios. Lower is better. The values in the table are 
+                expressed as mean ± standard deviation. Our SAC-ImKL (or SoftCTRL) method improves safety 
+                over BC-perturb baselines by reducing the collision rate while performing 
+                as smoothly as BC-perturb
+            </p>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-2">Highlight Results</h2>
+            </div>
+        </div>
+    <div>
+    <TABLE BORDER="0" class="centerTable" id="cssTable">
+        <caption>Scenario 1: BC-perturb collides with a front vehicle stopped at a red light, while RL methods
+            stop and leave enough clearance</caption>
+        <TR>
+        <TD><b>BC</b></TD> <TD ><b>SAC</b></TD> <TD> <b>SAC-ExKL</b> </TD> <TD> <b>SAC-ImKL</b> </TD>
+        </TR>
+        <TR>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/BC_perturb/2.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC/2.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ExKL/2.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ImKL/2.gif"/> </TD>
+        </TR>
+        <TR>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/BC_perturb/2.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC/2.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ExKL/2.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ImKL/2.png"/> </TD>
+        </TR>
+    </TABLE>
+    </div>
+    <br>
+
+    <div>
+    <TABLE BORDER="0" class="centerTable" id="cssTable">
+        <CAPTION>Scenario 2: SAC changes lane and gets stuck in the middle of an intersection, 
+            in contrast, BC and SAC-ExKL and SAC-ImKL (SoftCTRL) drives smoothly through the intersection without any collision.
+        </CAPTION>
+        <TR>
+        <TD><b>BC</b></TD> <TD ><b>SAC</b></TD> <TD> <b>SAC-ExKL</b> </TD> <TD> <b>SAC-ImKL</b> </TD>
+        </TR>
+        <TR>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/BC_perturb/131.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC/131.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ExKL/131.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ImKL/131.gif"/> </TD>
+        </TR>
+        <TR>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/BC_perturb/131.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC/131.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ExKL/131.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ImKL/131.png"/> </TD>
+        </TR>
+    </TABLE>
+        <div class="content has-text-justified">
+<b>Qualitative results. </b>Demostrations of 2 win case against baselines method in 
+        the unseen test set (SDV in red, other agents in blue, crosswalks in yellow, SDV trajectory 
+        in the green line). The bottom side plots are the associated acceleration action 
+        (red dashed lines represent the boundary value of smoothness). Every plot depicts 250 time 
+        steps in 1 scene, which is a 25-second scene (0.1 sec interval)
+
+        </div>
+    </div>
+        <!-- <p>BC</p>
+    </div>
+    <div>
+        <img class="round" style="width:200px" src="./sources/qualitative/videos/BC_perturb/2.gif"/>
+        <img class="round" style="width:250px" src="./sources/qualitative/actions/BC_perturb/2.png"/>
+        <img class="round" style="width:200px" src="./sources/qualitative/videos/BC_perturb/2.gif"/>
+        <img class="round" style="width:250px" src="./sources/qualitative/actions/BC_perturb/2.png"/>
+    </div> -->
+    </div>
+</section>
+
+<!-- <hr> -->
+
+
+<!-- <section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths"> -->
+                <!-- <h2 class="title is-2">Code</h2>
+                <p> We provide inference code of our method on GitHub. Furthermore, to show our method, we provide
+			a Colab notebook.</p> -->
+                <!-- Code Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://github.com/vobecant/DriveAndSegment" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span> -->
+
+                <!-- Code Link. -->
+<!--                 <span class="link-block">
+                  <a href="https://huggingface.co/spaces/vobecant/DaS" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fa fa-gamepad"></i>
+                    </span>
+                    <span>Gradio</span>
+                  </a>
+                </span>
+ -->
+                <!-- Code Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://colab.research.google.com/drive/126tBVYbt1s0STyv8DKhmLoHKpvWcv33H?usp=sharing"
+                     target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-google"></i>
+                    </span>
+                    <span>Colab</span>
+                  </a>
+                </span> -->
+            <!-- </div>
+        </div>
+    </div>
+</section> -->
+
+
+<!-- <section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h3 class="title is-3">Live Demo</h3>
+                <p> If the Huggingface demo below is not loading properly for you, please visit this <a
+                        href="https://huggingface.co/spaces/vobecant/DaS" target="_blank" rel="noopener noreferrer">link
+                    <i class="fas fa-external-link-alt"></i></a>. </p>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+
+<section class="section">
+    <div id="target"></div>
+    <script src="https://gradio.s3-us-west-2.amazonaws.com/2.6.2/static/bundle.js"></script>
+    <script>
+        launchGradioFromSpaces("vobecant/DaS", "#target")
+    </script>
+</section>
+
+<hr>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-2">Paper and Supplementary Material</h2>
+            </div>
+        </div>
+
+        <br>
+        <div class="columns is-centered">
+            <a href="https://arxiv.org/abs/2203.11160" target="_blank" rel="noopener noreferrer"><img
+                    class="layered-paper-big" style="height:175px"
+                    src="./sources/paper.png"/></a>
+            <span style="font-size:14pt">Tri, Huynh and Dung, Nguyen.<br>
+				<b>SoftCTRL: Soft conservative KL-control of Transformer Reinforcement Learning<br> for Autonomous Driving</b><br>
+                ArXiv preprint, 2024.<br>
+				(hosted on <a href="https://arxiv.org/abs/2410.22752" target="_blank"
+                              rel="noopener noreferrer">ArXiv</a>)<br>
+				</span>
+        </div>
+
+        <br>
+        <div class="column is-four-fifths">
+            <h2 class="title is-3">BibTeX <a href="#" onclick="CopyToClipboard('bibtex');return false;"><span
+                    class="icon"><i class="fa fa-copy"></i></span></a></h2>
+        </div>
+        <div class="columns is-centered">
+        <pre><code id="bibtex">@misc{huynh2024softctrl,
+  title={SoftCTRL: Soft conservative KL-control of Transformer Reinforcement Learning for Autonomous Driving},
+  author={Tri, Huynh and Duc Dung Nguyen},
+  eprint={2410.22752},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2410.22752}, 
+  year={2024}
+}</code></pre>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Ack. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h4 class="title is-3">Acknowledgements</h4>
+                <div class="content has-text-justified">
+                    <p>
+                        The computational resource for this work is supported by Innovation FabLab, 
+                        Ho Chi Minh City University of Technology (HCMUT).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>
+                        This website is forked from source of <a href="https://vobecant.github.io/DriveAndSegment/"
+                                                                 target="_blank" rel="noopener noreferrer">
+                        this page</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>

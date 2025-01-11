@@ -1,0 +1,9 @@
+@misc{huynh2024softctrl,
+  title={SoftCTRL: Soft conservative KL-control of Transformer Reinforcement Learning for Autonomous Driving},
+  author={Tri, Huynh and Duc Dung Nguyen},
+  eprint={2410.22752},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2410.22752}, 
+  year={2024}
+}
