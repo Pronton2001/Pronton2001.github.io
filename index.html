@@ -401,7 +401,7 @@
         </div>
     <div>
     <TABLE BORDER="0" class="centerTable" id="cssTable">
-        <caption>Scenario 1: BC-perturb collides with a front vehicle stopped at a red light, while RL methods
+        <caption>Scenario 1: Red traffic light scene. BC-perturb collides with a front vehicle stopped at a red light, while RL methods
             stop and leave enough clearance</caption>
         <TR>
         <TD><b>BC</b></TD> <TD ><b>SAC</b></TD> <TD> <b>SAC-ExKL</b> </TD> <TD> <b>SAC-ImKL</b> </TD>
@@ -421,32 +421,54 @@
     </TABLE>
     </div>
     <br>
-
     <div>
     <TABLE BORDER="0" class="centerTable" id="cssTable">
-        <CAPTION>Scenario 2: SAC changes lane and gets stuck in the middle of an intersection, 
+        <CAPTION>Scenario 2: Dense traffic. SAC changes lane and gets stuck in the middle of an intersection, 
             in contrast, BC and SAC-ExKL and SAC-ImKL (SoftCTRL) drives smoothly through the intersection without any collision.
         </CAPTION>
         <TR>
         <TD><b>BC</b></TD> <TD ><b>SAC</b></TD> <TD> <b>SAC-ExKL</b> </TD> <TD> <b>SAC-ImKL</b> </TD>
         </TR>
         <TR>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/BC_perturb/131.gif"/> </TD>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC/131.gif"/> </TD>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ExKL/131.gif"/> </TD>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ImKL/131.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/BC_perturb/65.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC/65.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ExKL/65.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ImKL/65.gif"/> </TD>
         </TR>
         <TR>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/BC_perturb/131.png"/> </TD>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC/131.png"/> </TD>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ExKL/131.png"/> </TD>
-        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ImKL/131.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/BC_perturb/65.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC/65.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ExKL/65.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ImKL/65.png"/> </TD>
+        </TR>
+    </TABLE>
+    <br>
+    <div>
+    <TABLE BORDER="0" class="centerTable" id="cssTable">
+        <CAPTION>Scenario 3: T-junction. All RL approaches diverge from human logs, whereas IL accurately predicts the correct turns.. 
+            Therefore, IL achieves significantly lower IL error compared to RL agents. SAC and SAC-ExKL exhibit erratic behavior and drive off-road. 
+            Notably, SAC-ImKL (SoftCTRL) successfully executes a smooth left turn without colliding with other objects or driving off-road.
+        </CAPTION>
+        <TR>
+        <TD><b>BC</b></TD> <TD ><b>SAC</b></TD> <TD> <b>SAC-ExKL</b> </TD> <TD> <b>SAC-ImKL</b> </TD>
+        </TR>
+        <TR>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/BC_perturb/57.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC/57.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ExKL/57.gif"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/videos/SAC_ImKL/57.gif"/> </TD>
+        </TR>
+        <TR>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/BC_perturb/57.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC/57.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ExKL/57.png"/> </TD>
+        <TD>        <img class="round" style="width:250px" src="./sources/qualitative/actions/SAC_ImKL/57.png"/> </TD>
         </TR>
     </TABLE>
         <div class="content has-text-justified">
-<b>Qualitative results. </b>Demostrations of 2 win case against baselines method in 
+<b>Qualitative results. </b>Demostrations of 3 win case against baselines method in 
         the unseen test set (SDV in red, other agents in blue, crosswalks in yellow, SDV trajectory 
-        in the green line). The bottom side plots are the associated acceleration action 
+        in the green line, SDV ground-truth trajectory in yellow line). The bottom side plots are the associated acceleration action 
         (red dashed lines represent the boundary value of smoothness). Every plot depicts 250 time 
         steps in 1 scene, which is a 25-second scene (0.1 sec interval)
 
@@ -550,7 +572,8 @@
                     class="layered-paper-big" style="height:175px"
                     src="./sources/paper.png"/></a>
             <span style="font-size:14pt">Tri, Huynh and Dung, Nguyen.<br>
-				<b>SoftCTRL: Soft conservative KL-control of Transformer Reinforcement Learning<br> for Autonomous Driving</b><br>
+				<b>SoftCTRL: Soft conservative KL-control of Transformer Reinforcement Learning
+                <br> for Autonomous Driving</b><br>
                 ArXiv preprint, 2024.<br>
 				(hosted on <a href="https://arxiv.org/abs/2410.22752" target="_blank"
                               rel="noopener noreferrer">ArXiv</a>)<br>
