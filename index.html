@@ -258,15 +258,19 @@
             </div>
         </div>
         <div class="columns is-centered">
-            <img class="round" style="width:400px" src="./sources/videos/KLSAC/7.gif"/>
-            <img class="round" style="width:400px" src="./sources/videos/KLSAC/8.gif"/>
-            <img class="round" style="width:400px" src="./sources/videos/KLSAC/10.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/4.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/5.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/6.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/7.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/9.gif"/>
         </div>
         <br>
         <div class="columns is-centered">
-            <img class="round" style="width:400px" src="./sources/videos/KLSAC/43.gif"/>
-            <img class="round" style="width:400px" src="./sources/videos/KLSAC/57.gif"/>
-            <img class="round" style="width:400px" src="./sources/videos/KLSAC/78.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/10.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/43.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/57.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/65.gif"/>
+            <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/78.gif"/>
         </div>
 
         <div class="content has-text-justified">
@@ -304,8 +308,8 @@
                         prevent the model from searching for a global solution.
                     </p>
                     <p>
-                        To address these problems, we propose a Soft conservative KL-ConTrol 
-                        of RL model (SoftCTRL) for autonomous driving, a novel approach for 
+                        To address these problems, we propose a <b>S</b>oft conservative <b>KL</b>-<b>C</b>on<b>T</b>rol 
+                        of <b>RL</b> model (<b>SoftCTRL</b>) for autonomous driving, a novel approach for 
                         off-policy RL. First, we use a pretrained Transformer IL model to 
                         constrain RL updates with simple rewards. During the training step, 
                         the RL policy is implicitly regularized by the KL divergence from this
@@ -401,7 +405,7 @@
         </div>
     <div>
     <TABLE BORDER="0" class="centerTable" id="cssTable">
-        <caption>Scenario 1: Red traffic light scene. BC-perturb collides with a front vehicle stopped at a red light, while RL methods
+        <caption><b>Scenario 1: Red traffic light.</b> BC-perturb collides with a front vehicle stopped at a red light, while RL methods
             stop and leave enough clearance</caption>
         <TR>
         <TD><b>BC</b></TD> <TD ><b>SAC</b></TD> <TD> <b>SAC-ExKL</b> </TD> <TD> <b>SAC-ImKL</b> </TD>
@@ -423,7 +427,7 @@
     <br>
     <div>
     <TABLE BORDER="0" class="centerTable" id="cssTable">
-        <CAPTION>Scenario 2: Dense traffic. SAC changes lane and gets stuck in the middle of an intersection, 
+        <CAPTION><b>Scenario 2: Dense traffic.</b> SAC changes lane and gets stuck in the middle of an intersection, 
             in contrast, BC and SAC-ExKL and SAC-ImKL (SoftCTRL) drives smoothly through the intersection without any collision.
         </CAPTION>
         <TR>
@@ -445,8 +449,8 @@
     <br>
     <div>
     <TABLE BORDER="0" class="centerTable" id="cssTable">
-        <CAPTION>Scenario 3: T-junction. All RL approaches diverge from human logs, whereas IL accurately predicts the correct turns.. 
-            Therefore, IL achieves significantly lower IL error compared to RL agents. SAC and SAC-ExKL exhibit erratic behavior and drive off-road. 
+        <CAPTION><b>Scenario 3: T-junction. </b>All RL approaches diverge from human logs, whereas IL accurately predicts the correct turns. 
+            Therefore, IL achieves significantly lower IL error compared to RL agents. SAC and SAC-ExKL exhibit erratic behavior and drive off-road.
             Notably, SAC-ImKL (SoftCTRL) successfully executes a smooth left turn without colliding with other objects or driving off-road.
         </CAPTION>
         <TR>
