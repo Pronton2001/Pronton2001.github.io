@@ -20,10 +20,30 @@
       }
 
     .centerTable { margin: 0px auto; }
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
     hr {
         border: 0;
         height: 1px;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    }
+    table caption { 
+        padding: 10px;
+        caption-side: bottom;
+    }
+    figure {
+        display: inline-block;
+        margin: 20px; /* adjust as needed */
+    }
+    figure img {
+        vertical-align: top;
+    }
+    figure figcaption {
+        text-align: center;
     }
 
 
@@ -236,7 +256,7 @@
                         imitation tasks, our proposed method significantly improves robustness 
                         (over 17% reduction in failures) and generates human-like driving behavior. 
                     </p>
-                    <img class="round" style="width:1000px"  src="./sources/teaser/transformerRL-pipeline.svg"/>
+                    <img class="round" style="width:1000px"  src="./sources/teaser/transformerRL_pipeline.svg"/>
                 </div>
             </div>
         </div>
@@ -273,7 +293,8 @@
             <img class="round" style="width:200px" src="./sources/qualitative/videos/SAC_ImKL/78.gif"/>
         </div>
 
-        <div class="content has-text-justified">
+        <!-- <div class="content has-text-justified"> -->
+        <div class="columns is-centered">
             <p>
                 <b>Qualitative results.</b>
                 Demostrations of SoftCTRL in the unseen test set. Each video is a 25-second scenario, 
@@ -299,20 +320,17 @@
                         driving datasets and safety with causal relationship modeling.
                         Traditional KL-loss methods use IL (teacher) policy to constrain RL 
                         (student) policy. However, these approach may lead to the over-conservation 
-                        problem caused by covariate shift of IL.  This issue happens when IL 
-                        trained with logged datasets guide RL students in online training process, 
-                        where exploration is possible. Accumulated single-step errors can cause 
-                        planned states to diverge from the dataset distribution, resulting in 
-                        a compounding error issue. Therefore, this constraint force causes the 
-                        RL student to be too conservative with the estimated expert policies to 
-                        prevent the model from searching for a global solution.
+                        problem caused by covariate shift of estimated expert policies (IL), 
+                        preventing the RL model from searching for a global solution.                    
                     </p>
                     <p>
                         To address these problems, we propose a <b>S</b>oft conservative <b>KL</b>-<b>C</b>on<b>T</b>rol 
                         of <b>RL</b> model (<b>SoftCTRL</b>) for autonomous driving, a novel approach for 
                         off-policy RL. First, we use a pretrained Transformer IL model to 
-                        constrain RL updates with simple rewards. During the training step, 
-                        the RL policy is implicitly regularized by the KL divergence from this
+                        constrain RL updates with simple rewards. Regarding RL network, we leverage 
+                        a learnable Transformer encoder to embed vectorized information and a MLP 
+                        decoder to output Q value and action distribution. During the training 
+                        step, the RL policy is implicitly regularized by the KL divergence from this
                         prior model and the entropy of its actions. The entropy term
                         encourages the model to generate more diverse trajectories.
                         This combats the over-conservation issues when retaining the
@@ -357,7 +375,10 @@
             <p>
                 SoftCTRL is built on SAC, we simply modify the regression 
                 target of the policy evaluation step in SAC by adding the scaled log policy 
-                of reference behavioral method to the reward in any TD scheme. 
+                of reference behavioral method to the reward in any TD scheme. What happens underneath this
+                modification is that it implicitly performs maximum entropy and minimum KL regularization from the
+                reference policy π0, with KL scaled by ατ and entropy scaled
+                by (1 − α)τ 
             </p>
         </div>
     </div>
@@ -369,28 +390,82 @@
 <section class="section">
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <h2 class="title is-2">Quantitative Result</h2>
-            </div>
+            <!-- <div class="column is-four-fifths"> -->
+                <h2 class="title is-2">Result Highlights</h2>
+            <!-- </div> -->
+        </div>
+        <br>
+        <div class="columns is-centered">
+            <p>
+                <!-- <b>Qualitative results.</b> -->
+                In the table below, we find that our SAC-ImKL (SoftCTRL) outperforms IL-only, 
+                RL-only, and KL-regularized RL by reducing 17% failure cases compared to BC-perturb 
+                and SAC-ExKL baselines. Moreover, our approach achieves a smooth driving performance on 
+                par with IL-only policy and 3.55x less jerker motion than RL-only.
+            </p>
         </div>
         <!-- <div class="content has-text-justified">
             <p>
 
             </p>
         </div> -->
-        <div class="columns is-centered">
-            <img class="round" style="width:850px" src="./sources/method/quantitative.png"/>
-        </div>
-        <div class="content has-text-justified">
-            <p>
+        <!-- <div class="columns is-centered"> -->
+        <figure>
+            <img class="center" style="width:1000px" src="./sources/method/quantitative.png"/>
+            <figcaption class = 'round'>
                 <b>Quantitative results.</b>
                 Evaluation of different methods using closed-loop evaluation in DriverGym 
                 on 100 sampled scenarios. Lower is better. The values in the table are 
                 expressed as mean ± standard deviation. Our SAC-ImKL (or SoftCTRL) method improves safety 
-                over BC-perturb baselines by reducing the collision rate while performing 
-                as smoothly as BC-perturb
+                over baselines while driving as smoothly as BC-perturb
+            </figcaption>
+            </figure>
+        <!-- </div> -->
+        <br>
+
+
+        <div class="content has-text-justified">
+            <p>
+                We further study the complementarity role of entropy and KL divergence to balance 
+                between the unnatural (diversity) and conservation (realism) of the model. 
+                Our experiment shows that a high enough value of KL (=0.7) helps to align the
+                smoothness close to the reference policy (3.84), but too large
+                KL causes high failures and jerkier motion. Notable, increasing the entropy coefficient (e.g. 4, 7),
+                is beneficial in dropping both discomfort rate and failure cases.
+
             </p>
         </div>
+        <!-- <figure>
+            <img class="round" style="width:400px" src="./sources/experiments/entropy_effect_of_SAC_ImKL.svg"/>
+            <figcaption> Entropy coefficient (KL coefficient = 0.5) </figcaption>
+        </figure>
+        <figure>
+            <img class="round" style="width:400px" src="./sources/experiments/KL_effect_of_SAC_ImKL.svg"/>
+            <figcaption> KL coefficient (entropy coefficient= 0.7) </figcaption>
+        </figure> -->
+        <TABLE BORDER="0" class="centerTable" id="cssTable">
+            <caption>
+            <b>Entropy and KL trade-off.</b> The effect of KL and entropy terms of SAC-ImKL (SoftCTRL) that
+                are evaluated on the validation set (Failure and Discomfort).
+                The blue and red dash lines indicate the Failure and Discomfort of BC-perturb respectively</caption>
+            </div>
+            <TR>
+            <!-- <TD>        <img class="round" style="width:400px" src="./sources/experiments/entropy_effect_of_SAC_ImKL.svg"/> </TD> -->
+             <TD>
+                <figure>
+                    <img class="round" style="width:600px" src="./sources/experiments/entropy_effect_of_SAC_ImKL.svg"/>
+                    <figcaption> Entropy coefficient (KL coefficient = 0.5) </figcaption>
+                </figure>
+             </TD>
+            <!-- <TD>        <img class="round" style="width:400px" src="./sources/experiments/KL_effect_of_SAC_ImKL.svg"/> </TD> -->
+             <TD>
+                <figure>
+                    <img class="round" style="width:600px" src="./sources/experiments/KL_effect_of_SAC_ImKL.svg"/>
+                    <figcaption> KL coefficient (entropy coefficient= 0.7) </figcaption>
+                </figure>
+             </TD>
+            </TR>
+        </TABLE>
     </div>
 </section>
 
@@ -400,7 +475,7 @@
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
-                <h2 class="title is-2">Highlight Results</h2>
+                <h2 class="title is-2">Visualizations</h2>
             </div>
         </div>
     <div>
